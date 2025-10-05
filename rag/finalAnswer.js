@@ -7,6 +7,7 @@ const { CEREBRAS_API_KEY } = process.env;
 const client = new Cerebras({
   apiKey: CEREBRAS_API_KEY,
 });
+console.log("cerberase api", CEREBRAS_API_KEY);
 
 async function generateFinalAnswer(userMessage, githubContext) {
   console.log("\n🧠 Step 3: Asking LLM to synthesize the final answer...");
@@ -62,7 +63,7 @@ Please provide a helpful answer based on the context above.`;
       ],
       model: 'gpt-oss-120b',
       stream: false,
-      max_completion_tokens: 200,
+      max_completion_tokens: 300,
       temperature: 1,
       top_p: 1,
       reasoning_effort: "medium"

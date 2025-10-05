@@ -13,8 +13,34 @@
 ## The overview of system 
 ![Screenshot of the system arch](images/system.png)
 
+## How to start
+### 1. Clone the repo
+> git clone https://github.com/adityav477/P-roxy
+  cd P-roxy
 
-## Explanation
+### 2. Get the API keys mentioned in stt/.env.example
+
+### 3. Start the webhook.js
+> cd stt
+> node webhook.js
+
+### 4. You would need ngrok or other similar service that will make your localhost:8000 public 
+> ngrok http 8000
+
+ you need ngrok so that the recall.ai can send transcripts to your local webhook running 8000
+ refer this-> [AsseblyAI+ recall.ai implementation](https://www.assemblyai.com/docs/integrations/recall)
+
+### 4. Start meetings.js in another terminal
+> node meetings.js 
+
+### 5. Start the google meet and paste the meeting url in the meetings.js terminal
+ the transcript will not reflect immediately so please wait for few seconds
+
+### 6. To stop type STOP that will stop the meeting and make your bot leave in the meetings.js terminal
+> [BOT] Check Terminal 2 for real-time transcripts
+  Type "STOP" to end transcription:
+## Tech Stack 
+
  ### LLM1:
 - decides if the questions needs the context from the Github and Slack or from the past responses
 - if no then the llm1 gives the human like response
@@ -25,19 +51,28 @@ traditional rag can take too much time and decided to utilize the githubs inbuil
 - comparatively quite smaller reasoning model
 
 ### TTS and STT:
-text to speec and speech to text 
+- TTS - used ElevenLabs
+- STT - used Assembly along with Recall.ai
 
-### Features that will be good:
+## For Meeting Bots:
+- used Recall.ai webhook + Assembly AI to get transcripts using webhooks [webhook.js](stt/webhook.js)
+- and for sending voice to meetings also used Recall.ai /output_audio endpoint [tts.js](tts/tts.js)
+
+## Features that will be good:
 - Same voice that tough real time is tough (Must to fool your co workers)
 - maybe we could also do chat injestion instead of necessary voice (but implementing voice > implementing text)
 - the key lies in the prompts of the llm's
-- Add a text input option if llm hallucinates then you can intervene in between to give your personalised answer
+- making human intervention possible
+- using Avatar of the user too give a more realistic feel
 
-### Note & Problems:
+## Note & Problems:
 - selection of prompts and models will be decided based on trial and error 
-- privacy with exposing your codebase to LLM'S
-- Yet to test the latency (which is highly reduced thanks to Cerebras)
+- currently because of poor prompting sometimes the **Github** url and query are not that great
+but can be optimized with fine tuning wrt github api docs
+- Recall .ai is sometimes lags in sending voice to webhooks
 
 
+### Demo:
+[Demo Video](https://www.youtube.com/watch?v=d-jtwYeNT9A)
 
 
