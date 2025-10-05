@@ -1,5 +1,4 @@
-/******************************************************************************
- * RECALL.AI + ASSEMBLYAI INTEGRATION WEBHOOK SERVER
+/****************************************************************************** RECALL.AI + ASSEMBLYAI INTEGRATION WEBHOOK SERVER
  * 
  * This server receives real-time transcripts from Recall.ai, which acts as a
  * bridge between Zoom meetings and AssemblyAI's transcription service.
@@ -18,6 +17,7 @@
  ******************************************************************************/
 import 'dotenv/config'
 import express from 'express'
+import LLMLogic from "../rag/index.js"
 
 /******************************************************************************
  * Express Configuration
@@ -53,6 +53,10 @@ app.post('/meeting_transcript', (req, res) => {
         } else {
           // Reconstruct from individual words
           transcriptText = words.map(word => word.text).join(' ')
+        }
+
+        if (eventType === 'FINAL') {
+          LLMLogic(transcriptText);
         }
 
         // Display the transcript

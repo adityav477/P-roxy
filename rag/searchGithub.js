@@ -1,12 +1,14 @@
 import { Octokit } from "@octokit/rest";
+import dotenv from "dotenv"
+dotenv.config({ path: new URL('../stt/.env', import.meta.url).pathname })
 
 const { GITHUB_TOKEN } = process.env;
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
-async function searchGitHub(githubURL: string, githubQuery: string) {
+async function searchGitHub(githubURL, githubQuery) {
   console.log("\n🔎 Step 2: Searching GitHub with the generated query...");
-  console.log("\n githubURL:", githubURL, " githubQuery:", githubQuery);
+  // console.log("\n githubURL:", githubURL, " githubQuery:", githubQuery);
   try {
     // We use search.issuesAndPullRequests as it's versatile
     const response = await octokit.request(`${githubURL}`, {
@@ -24,7 +26,7 @@ async function searchGitHub(githubURL: string, githubQuery: string) {
     //   .join("\n");
     //
     // console.log("📄 Found context from GitHub.");
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error searching GitHub:", error.message);
