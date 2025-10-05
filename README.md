@@ -1,5 +1,5 @@
-## What is?
-- just like the name suggests it acts as a proxy agent for you that attends meetings for you 
+## What is Proxy?
+Proxy is an intelligent meeting agent that attends routine meetings on your behalf. It leverages fast LLM inference (powered by Cerebras) to provide human-like responses in real-time, handling status updates, standard check-ins, and informational queries while you focus on work that actually matters.
 
 ## My motivation behind this:
 - The motivation behind this idea was the boring meetings on updates and scrum meetings which do not require your attention 
